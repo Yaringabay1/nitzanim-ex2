@@ -10,6 +10,9 @@ env FLASK_ENV=development
 
 
 RUN pip install -r requirements.txt
+RUN flask init-db
+
+
 
 EXPOSE 5000
 
