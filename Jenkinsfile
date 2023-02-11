@@ -23,7 +23,8 @@ pipeline {
 
         stage('Run Docker Image on Remote Server') {
             steps {
-                sh 'ssh -i C:\Users\ניצנים\Downloads\devops_1 ubuntu@3.250.142.105 "docker run -d --name my_flask_container -p 5000:5000 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
+                sh 'ssh ubuntu@3.250.142.105 "docker pull 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
+                sh 'ssh ubuntu@3.250.142.105 "docker run -d 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
             }
         }
     }
