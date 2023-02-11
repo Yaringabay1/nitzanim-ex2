@@ -18,11 +18,17 @@ pipeline {
 
         stage('Run The Docker Image on My Remote Server') {
             steps {
-                withEnv(["AWS_ACCESS_KEY_ID=AKIAVDQNLGLNKUZUVOSJ", "AWS_SECRET_ACCESS_KEY=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"]) {
-                    sh 'ssh ubuntu@3.250.142.105 "docker pull 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
-                    sh 'ssh ubuntu@3.250.142.105 "docker run 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
+                script {
+                  def secrets = readFile("secrets.txt")
+                  def accessKeyId = secrets.split("\n")[0].trim()
+                  def secretAccessKey = secrets.split("\n")[1].trim()
+                  env.AWS_ACCESS_KEY_ID = accessKeyId
+                  env.AWS_SECRET_ACCESS_KEY = secretAccessKey
                 }
+                sh 'ssh ubuntu@3.250.142.105 "docker pull 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
+                sh 'ssh ubuntu@3.250.142.105 "docker run 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest"'
             }
         }
     }
 }
+
