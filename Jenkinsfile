@@ -18,8 +18,8 @@ pipeline {
                   env.AWS_SECRET_ACCESS_KEY = secretAccessKey
                 }
                 sh 'aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 351141573338.dkr.ecr.eu-west-1.amazonaws.com'
-                sh 'docker tag flask_app 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest'
-                sh 'docker push 351141573338.dkr.ecr.eu-west-1.amazonaws.com/flask_app:latest'
+                sh 'docker tag flask_app 351141573338.dkr.ecr.eu-west-1.amazonaws.com/ex2:latest'
+                sh 'docker push 351141573338.dkr.ecr.eu-west-1.amazonaws.com/ex2:latest'
             }
         }
 
